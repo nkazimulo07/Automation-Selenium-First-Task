@@ -29,12 +29,11 @@ namespace FirstAutoTest
         private IWebElement passwordInput => driver.FindElement(By.Id("passwd"));
         private IWebElement SubmitLogin => driver.FindElement(By.Id("SubmitLogin"));
         private IWebElement myAccountList => driver.FindElement(By.CssSelector("ul.myaccount-link-list"));
-        private IWebElement signInLink => driver.FindElement(By.CssSelector("a.login"));
-
+        private IWebElement signInLink => driver.FindElement(By.LinkText("Sign in"));
+       
         [SetUp]
         public void SetUp()
         {
-
             using(IWebDriver newDriver = new ChromeDriver())
             {
                 driver = newDriver;
@@ -43,8 +42,6 @@ namespace FirstAutoTest
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
                 Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             }
-           
-        
         }
 
         [Test]
