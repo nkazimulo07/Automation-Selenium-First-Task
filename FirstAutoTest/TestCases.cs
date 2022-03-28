@@ -59,12 +59,12 @@ namespace FirstAutoTest
         [Test]
         public void GivenItemName_WhenSearchingForItem_ThenReturnSearchResults()
         {
-            searchInput.SendKeys("dress");
+            searchInput.SendKeys("Printed dress");
             searchButton.Click();
 
             foreach (var itemResult in SearchItemNames)
             {
-                Assert.IsTrue(itemResult.Text.Contains("Printed") && itemResult.ToString().Contains("Printed"));
+                Assert.IsTrue(itemResult.Text.Contains("Printed") && itemResult.ToString().Contains("dress"));
             }
         }
 
