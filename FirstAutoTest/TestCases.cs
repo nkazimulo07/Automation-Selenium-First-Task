@@ -14,18 +14,17 @@ namespace FirstAutoTest
     {
         private IWebDriver driver;
         private WebDriverWait Wait;
-
+        private const string Url = "http://automationpractice.com/index.php";
         private IWebElement searchInput => driver.FindElement(By.Name("search_query"));
         private IWebElement searchButton => driver.FindElement(By.Name("submit_search"));
         private IWebElement centerColumn => driver.FindElement(By.Id("center_column"));
         private List<IWebElement> SearchItemNames => new List<IWebElement>(centerColumn.FindElements(By.CssSelector("ul.product.list.grid.row")));
-        private IWebElement subjectHeading => driver.FindElement(By.Id("id_contact"));
         private IWebElement emailInput => driver.FindElement(By.Id("email"));
+        private IWebElement subjectHeadingDropdown => driver.FindElement(By.Id("id_contact"));
         private IWebElement orderReference => driver.FindElement(By.Id("id_order"));
         private IWebElement message => driver.FindElement(By.Id("message"));
         private IWebElement contactUsLink => driver.FindElement(By.Id("contact-link"));
         private IWebElement submitMessage => driver.FindElement(By.Id("submitMessage"));
-        private IWebElement fileInput => driver.FindElement(By.CssSelector("span.filename"));
         private IWebElement emailSentSuccessfully => driver.FindElement(By.CssSelector("p.alert.alert-success"));
         private IWebElement passwordInput => driver.FindElement(By.Id("passwd"));
         private IWebElement SubmitLogin => driver.FindElement(By.Id("SubmitLogin"));
@@ -35,19 +34,24 @@ namespace FirstAutoTest
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            using(IWebDriver newDriver = new ChromeDriver())
+            {
+                driver = newDriver;
+                driver.Manage().Window.Maximize();
+                driver.Navigate().GoToUrl(Url);
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+                Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            }
+           
+        
         }
 
         [Test]
         public void GivenRequiredData_WhenSendingEmailViaContactUsPage_ThenReturnEmailSuccesfullySent()
         {
             contactUsLink.Click();
-            var subjectHeadingOptions = new SelectElement(subjectHeading);
-            subjectHeadingOptions.SelectByValue("2");
+            subjectHeadingDropdown.FindElement(By.XPath("//option[. = 'Customer service']")).Click();
             emailInput.SendKeys("test@test.com");
             orderReference.SendKeys("101");
             message.SendKeys("My first selenium test");
