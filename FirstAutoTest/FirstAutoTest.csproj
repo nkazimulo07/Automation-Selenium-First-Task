@@ -59,7 +59,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestCases.cs" />
+    <Compile Include="SearchTest.cs" />
+    <Compile Include="SignInTest.cs" />
+    <Compile Include="ContactUsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
