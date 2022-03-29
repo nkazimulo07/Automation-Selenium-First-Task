@@ -17,7 +17,7 @@ namespace FirstAutoTest
 
         private IWebElement passwordInput => driver.FindElement(By.Id("passwd"));
         private IWebElement SubmitLogin => driver.FindElement(By.Id("SubmitLogin"));
-        private IWebElement myAccountList => driver.FindElement(By.CssSelector("ul.myaccount-link-list"));
+        private IWebElement myAccountLabel => driver.FindElement(By.CssSelector("h1.page-heading"));
         private IWebElement signInLink => driver.FindElement(By.CssSelector("a.login"));
         private IWebElement signOutLink => driver.FindElement(By.CssSelector("a.logout"));
         private IWebElement emailInput => driver.FindElement(By.Id("email"));
@@ -40,7 +40,7 @@ namespace FirstAutoTest
             emailInput.SendKeys("nka@gmail.com");
             passwordInput.SendKeys("Nk@Zee");
             SubmitLogin.Click();
-            Assert.IsTrue(myAccountList.Displayed);
+            Assert.IsTrue(myAccountLabel.Text.Equals("MY ACCOUNT"));
         }
 
         [TearDown]

@@ -16,7 +16,7 @@ namespace FirstAutoTest
         private WebDriverWait Wait;
         private const string Url = "http://automationpractice.com/index.php";
 
-        IWebElement contactUsLink => driver.FindElement(By.CssSelector("div#contact-link"));
+        private IWebElement contactUsLink => driver.FindElement(By.CssSelector("div#contact-link"));
         private IWebElement emailInput => driver.FindElement(By.Id("email"));
         private IWebElement subjectHeadingDropdown => driver.FindElement(By.Id("id_contact"));
         private IWebElement orderReference => driver.FindElement(By.Id("id_order"));
