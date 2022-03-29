@@ -85,7 +85,7 @@ namespace FirstAutoTest
         [TearDown]
         public void TearDown()
         {
-            if (!isLoggedIn)
+            if (isLoggedIn)
             {
                 signOutLink.Click();
             }
