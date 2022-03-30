@@ -19,15 +19,15 @@ namespace FirstAutoTest
         private IWebElement contactUsLink => driver.FindElement(By.CssSelector("div#contact-link"));
         private IWebElement emailTextBox => driver.FindElement(By.Id("email"));
         private IWebElement orderReferenceTextBox => driver.FindElement(By.Id("id_order"));
-        private IWebElement messagetextArea => driver.FindElement(By.Id("message"));
-        private IWebElement submitMessage => driver.FindElement(By.Id("submitMessage"));
+        private IWebElement messageTextArea => driver.FindElement(By.Id("message"));
+        private IWebElement submitMessageButton => driver.FindElement(By.Id("submitMessage"));
         private IWebElement emailSentSuccessfullyMessage => driver.FindElement(By.CssSelector("p.alert.alert-success"));
         private IWebElement searchTextBox => driver.FindElement(By.Name("search_query"));
         private IWebElement searchButton => driver.FindElement(By.Name("submit_search"));
         private IWebElement centerColumn => driver.FindElement(By.Id("center_column"));
         private List<IWebElement> SearchItemNames => new List<IWebElement>(centerColumn.FindElements(By.CssSelector("ul.product.list.grid.row")));
         private IWebElement passwordTextBox => driver.FindElement(By.Id("passwd"));
-        private IWebElement SubmitLogin => driver.FindElement(By.Id("SubmitLogin"));
+        private IWebElement loginButton => driver.FindElement(By.Id("SubmitLogin"));
         private IWebElement myAccountLabel => driver.FindElement(By.CssSelector("h1.page-heading"));
         private IWebElement signInLink => driver.FindElement(By.CssSelector("a.login"));
         private IWebElement signOutLink => driver.FindElement(By.CssSelector("a.logout"));
@@ -47,32 +47,32 @@ namespace FirstAutoTest
         }
 
         [Test]
-        public void GivenRequiredData_WhenSendingEmailViaContactUsPage_ThenEmailSentSuccessfulMessageReturned()
+        public void GivenRequiredData_WhenSendingEmailViaContactUsPage_EmailSentSuccessfulMessageReturned()
         {
             contactUsLink.Click();
             subjectHeadingDropdown.SelectByText("Customer service");
             emailTextBox.SendKeys("test@test.com");
             orderReferenceTextBox.SendKeys("101");
-            messagetextArea.SendKeys("My first selenium test");
-            submitMessage.Click();
+            messageTextArea.SendKeys("My first selenium test");
+            submitMessageButton.Click();
 
             Assert.IsTrue(emailSentSuccessfullyMessage.Displayed);
         }
 
         [Test]
-        public void GivenLoginValidCredentials_WhenLoging_ThenMyAccountPageReturned()
+        public void GivenLoginValidCredentials_WhenLoging_MyAccountPageReturned()
         {
             signInLink.Click();
             emailTextBox.SendKeys("nka@gmail.com");
             passwordTextBox.SendKeys("Nk@Zee");
-            SubmitLogin.Click();
+            loginButton.Click();
             isLoggedIn = true;
 
             Assert.IsTrue(myAccountLabel.Text.Equals("MY ACCOUNT"));
         }
 
         [Test]
-        public void GivenItemName_WhenSearchingForItem_ThenSearchResultsReturned()
+        public void GivenItemName_WhenSearchingForItem_SearchResultsReturned()
         {
             searchTextBox.SendKeys("Printed dress");
             searchButton.Click();
