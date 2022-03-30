@@ -18,7 +18,7 @@ namespace FirstAutoTest
 
         private IWebElement contactUsLink => driver.FindElement(By.CssSelector("div#contact-link"));
         private IWebElement emailTextBox => driver.FindElement(By.Id("email"));
-        private IWebElement orderReference => driver.FindElement(By.Id("id_order"));
+        private IWebElement orderReferenceTextBox => driver.FindElement(By.Id("id_order"));
         private IWebElement messagetextArea => driver.FindElement(By.Id("message"));
         private IWebElement submitMessage => driver.FindElement(By.Id("submitMessage"));
         private IWebElement emailSentSuccessfullyMessage => driver.FindElement(By.CssSelector("p.alert.alert-success"));
@@ -52,7 +52,7 @@ namespace FirstAutoTest
             contactUsLink.Click();
             subjectHeadingDropdown.SelectByText("Customer service");
             emailTextBox.SendKeys("test@test.com");
-            orderReference.SendKeys("101");
+            orderReferenceTextBox.SendKeys("101");
             messagetextArea.SendKeys("My first selenium test");
             submitMessage.Click();
 
